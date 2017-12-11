@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+<meta charset="UTF-8" />
+<title>Hello thymeleaf</title>
+</head>
+<body>
+	<!-- When this file is openend via webbrower directly, we will see "Hello html"
+		When using thymeleaf templating engine, we will alway see the th:text value 
+	 -->
+	<span th:text="${msg}">Hello html</span>
+</body>
+</html>
