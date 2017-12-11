@@ -23,10 +23,7 @@ public class HelloCtrl {
 	}
 	
 	@RequestMapping(path = "/mvc/hello")
-	public String helloWithTemplate(@RequestParam("name")String name ,Model model) {
-		if(name == null || name.length()==0) {
-			name = "Default name";
-		}
+	public String helloWithTemplate(@RequestParam(name="name", defaultValue="Default name")String name ,Model model) {		
 		model.addAttribute("msg", "hello " + name);
 		return "resultPage";
 	}
