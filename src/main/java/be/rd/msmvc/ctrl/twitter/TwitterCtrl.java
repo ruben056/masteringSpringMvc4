@@ -23,20 +23,20 @@ public class TwitterCtrl {
 	public String searchSomething(@RequestParam(defaultValue="snow") String search, Model model) {
 		
 		SearchResults searchResults = twitter.searchOperations().search(search);
-		List<String> results = getFirstResults(searchResults, 10);
+		List<Tweet> results = getFirstResults(searchResults, 10);
 		
 		model.addAttribute("tweets", results);
+		model.addAttribute("search", search);
 		return "tweetsPage";
 	}
 
-	private List<String> getFirstResults(SearchResults searchResults, int nrOfResults) {
+	private List<Tweet> getFirstResults(SearchResults searchResults, int nrOfResults) {
 		
 		if(searchResults.getTweets().isEmpty()) {
-			return Collections.<String>emptyList();
+			return Collections.<Tweet>emptyList();
 		}
 		
 		return searchResults.getTweets().stream()
-		 		.map(Tweet::getText)
 		 		.limit(nrOfResults)
 		 		.collect(Collectors.toList());
 	}
