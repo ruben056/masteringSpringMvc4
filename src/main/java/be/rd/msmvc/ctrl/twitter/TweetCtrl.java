@@ -19,7 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/mvc/twitter")
-public class TwitterCtrl {
+public class TweetCtrl {
 
 	@Autowired
 	private Twitter twitter;
