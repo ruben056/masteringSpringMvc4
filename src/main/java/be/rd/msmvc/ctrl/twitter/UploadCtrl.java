@@ -9,11 +9,13 @@ import java.net.URLConnection;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -36,12 +38,15 @@ public class UploadCtrl {
 	@Autowired
 	private PicturesUploadProperties picturesUploadProperties;
 	
+	@Autowired
+	private MessageSource messageSource; 
+	
 	
 	@ExceptionHandler(IOException.class)
-	public ModelAndView handleIOException(IOException e) {
+	public ModelAndView handleIOException(Locale locale) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/twitter/profile/uploadPage");
-		mv.addObject("error", e.getMessage());
+		mv.addObject("", messageSource.getMessage("upload.io.exception", null, locale));
 		return mv;
 	}
 	

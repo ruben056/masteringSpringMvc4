@@ -5,6 +5,7 @@ import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,11 +14,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import be.rd.msmvc.config.formatter.USLocalDateTimeFormatter;
 import be.rd.msmvc.ctrl.twitter.dto.ProfileForm;
+import be.rd.msmvc.session.twitter.UserProfileSession;
 
 @Controller
 @RequestMapping("/mvc/twitter")
 public class ProfileCtrl {
 
+	
+	@Autowired
+	private UserProfileSession userProfileSession;
+	
 	/**
 	 * This exposes an attribute to the webpage/view similar to the
 	 * model.addAttribute...()
@@ -37,6 +43,7 @@ public class ProfileCtrl {
 		if (bindingResult.hasErrors()) {
 			return "twitter/profile/profilePage";
 		}
+		userProfileSession.saveForm(profileForm);
 		return "redirect:/mvc/twitter/profile";
 	}
 
