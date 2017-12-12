@@ -2,6 +2,7 @@ package be.rd.msmvc.ctrl.twitter;
 
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
@@ -18,24 +19,38 @@ import be.rd.msmvc.ctrl.twitter.dto.ProfileForm;
 public class ProfileCtrl {
 
 	/**
-	 * This exposes an attribute to the webpage/view
-	 * similar to the model.addAttribute...()
+	 * This exposes an attribute to the webpage/view similar to the
+	 * model.addAttribute...()
 	 */
-	@ModelAttribute(name="dateFormat")
+	@ModelAttribute(name = "dateFormat")
 	public String localeFormat(Locale locale) {
 		return USLocalDateTimeFormatter.getPattern(locale);
 	}
-	
-	@RequestMapping(path = "/profile" , method=RequestMethod.GET)
+
+	@RequestMapping(path = "/profile", method = RequestMethod.GET)
 	public String displayProfile(ProfileForm profileForm) {
 		return "twitter/profile/profilePage";
 	}
-	
-	@RequestMapping(path = "/profile" , method=RequestMethod.POST)
+
+	@RequestMapping(path = "/profile", params = { "save" }, method = RequestMethod.POST)
 	public String saveProfile(@Valid ProfileForm profileForm, BindingResult bindingResult) {
-		if(bindingResult.hasErrors()) {
-			return "twitter/profile/profilePage";	
+		if (bindingResult.hasErrors()) {
+			return "twitter/profile/profilePage";
 		}
+		return "redirect:/mvc/twitter/profile";
+	}
+
+	@RequestMapping(path = "/profile", params = { "addTaste" }, method = RequestMethod.POST)
+	public String addTaste(ProfileForm profileForm) {
+
+		return "redirect:/mvc/twitter/profile";
+	}
+
+	@RequestMapping(path = "/profile", params = { "removeTaste" }, method = RequestMethod.POST)
+	public String removeTaste(ProfileForm profileForm, HttpServletRequest req) {
+
+		Integer rowId = Integer.parseInt(req.getParameter("removeTaste"));
+		profileForm.getTastes().remove(rowId.intValue());
 		return "redirect:/mvc/twitter/profile";
 	}
 }
