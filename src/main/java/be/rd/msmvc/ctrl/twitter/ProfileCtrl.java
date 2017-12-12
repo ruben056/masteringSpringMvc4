@@ -40,10 +40,10 @@ public class ProfileCtrl {
 		return "redirect:/mvc/twitter/profile";
 	}
 
-	@RequestMapping(path = "/profile", params = { "addTaste" }, method = RequestMethod.POST)
-	public String addTaste(ProfileForm profileForm) {
-
-		return "redirect:/mvc/twitter/profile";
+	@RequestMapping(path = "/profile", params = { "addRow" }, method = RequestMethod.POST)
+	public String addRow(ProfileForm profileForm) {
+		profileForm.getTastes().add("");
+		return "twitter/profile/profilePage";
 	}
 
 	@RequestMapping(path = "/profile", params = { "removeTaste" }, method = RequestMethod.POST)
@@ -51,6 +51,6 @@ public class ProfileCtrl {
 
 		Integer rowId = Integer.parseInt(req.getParameter("removeTaste"));
 		profileForm.getTastes().remove(rowId.intValue());
-		return "redirect:/mvc/twitter/profile";
+		return "twitter/profile/profilePage";
 	}
 }
