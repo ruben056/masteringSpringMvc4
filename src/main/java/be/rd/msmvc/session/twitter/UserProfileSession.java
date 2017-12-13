@@ -1,6 +1,7 @@
 package be.rd.msmvc.session.twitter;
 
 import java.io.Serializable;
+import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,8 @@ public class UserProfileSession implements Serializable {
 	private String email;
 	private LocalDate birthDate;
 	private List<String> tastes = new ArrayList<>();
+	
+	private Path picturePath;
 
 	public void saveForm(ProfileForm profileForm) {
 		this.twitterHandle = profileForm.getTwitterHandle();
@@ -35,4 +38,18 @@ public class UserProfileSession implements Serializable {
 		profileForm.setTastes(tastes);
 		return profileForm;
 	}
+	
+	
+	public void setPicturePath(Path picturePath) {
+		this.picturePath = picturePath;
+	}
+	
+	public Path getPicturePath() {
+		return picturePath;
+	}
+	
+	public List<String> getTastes() {
+		return tastes;
+	}
+	
 }

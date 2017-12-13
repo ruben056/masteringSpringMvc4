@@ -1,6 +1,7 @@
 package be.rd.msmvc.ctrl.twitter;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,7 +20,6 @@ import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -29,11 +29,15 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import be.rd.msmvc.config.upload.PicturesUploadProperties;
+import be.rd.msmvc.session.twitter.UserProfileSession;
 
 @Controller
 @SessionAttributes("picturePath")
 @RequestMapping(path= "/mvc/twitter/profile")
 public class UploadCtrl {
+	
+	@Autowired
+	private UserProfileSession userProfileSession;
 	
 	@Autowired
 	private PicturesUploadProperties picturesUploadProperties;
@@ -45,20 +49,9 @@ public class UploadCtrl {
 	@ExceptionHandler(IOException.class)
 	public ModelAndView handleIOException(Locale locale) {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("/twitter/profile/uploadPage");
+		mv.setViewName("/twitter/profile/profilePage");
 		mv.addObject("", messageSource.getMessage("upload.io.exception", null, locale));
 		return mv;
-	}
-	
-	@ModelAttribute("picturePath")
-	public Path picturePath() throws IOException {
-		return Paths.get(picturesUploadProperties.getAnonymousPicture().getFile().getCanonicalPath());
-	}
-	
-	
-	@RequestMapping(path = "/upload", method = RequestMethod.GET)
-	public String uploadPage() {
-		return "/twitter/profile/uploadPage";
 	}
 	
 	@RequestMapping(path = "/upload", method = RequestMethod.POST)
@@ -72,9 +65,34 @@ public class UploadCtrl {
 		
 		if(file.isEmpty() || !isImage(file)) {
 			redirectAttr.addFlashAttribute("error", "This is not a valid image file");
-			return "redirect:/mvc/twitter/profile/upload";
+			return "redirect:/mvc/twitter/profile";
 		}
 		
+		File tmpFile = copyFileToServer(file);
+		
+		userProfileSession.setPicturePath(Paths.get(tmpFile.getCanonicalPath()));
+		
+		return "redirect:/mvc/twitter/profile";
+	}
+
+
+	@RequestMapping(path = "/uploadedPicture")
+	public void getUploadedPicture(HttpServletResponse response) throws IOException {
+		
+		Path picturePath = userProfileSession.getPicturePath();
+		if(picturePath == null) {
+			picturePath = Paths.get(picturesUploadProperties.getAnonymousPicture().getFile().getCanonicalPath());
+		}
+		
+		response.setHeader("Content-Type",URLConnection.guessContentTypeFromName(picturePath.toString()));
+		Files.copy(picturePath, response.getOutputStream());
+	}
+	
+	private boolean isImage(MultipartFile file) {
+		return file.getContentType().startsWith("image");
+	}
+	
+	private File copyFileToServer(MultipartFile file) throws IOException, FileNotFoundException {
 		String fileName = file.getOriginalFilename();
 		String[] fileInfo = fileName.split("[.]");
 		File tmpFile = File.createTempFile(fileInfo[0], "."+fileInfo[1], 
@@ -85,19 +103,6 @@ public class UploadCtrl {
 		try(InputStream in = file.getInputStream()){
 			IOUtils.copy(in, out);	
 		}
-		
-		model.addAttribute("picturePath", Paths.get(tmpFile.getCanonicalPath()));
-		
-		return "/twitter/profile/uploadPage";
-	}
-
-	@RequestMapping(path = "/uploadedPicture")
-	public void getUploadedPicture(HttpServletResponse response, @ModelAttribute("picturePath") Path picturePath) throws IOException {
-		response.setHeader("Content-Type",URLConnection.guessContentTypeFromName(picturePath.toString()));
-		Files.copy(picturePath, response.getOutputStream());
-	}
-	
-	private boolean isImage(MultipartFile file) {
-		return file.getContentType().startsWith("image");
+		return tmpFile;
 	}
 }

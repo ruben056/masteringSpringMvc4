@@ -7,10 +7,12 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import be.rd.msmvc.config.formatter.USLocalDateTimeFormatter;
 import be.rd.msmvc.ctrl.twitter.dto.ProfileForm;
@@ -44,7 +46,8 @@ public class ProfileCtrl {
 			return "twitter/profile/profilePage";
 		}
 		userProfileSession.saveForm(profileForm);
-		return "redirect:/mvc/twitter/profile";
+		return "redirect:/mvc/twitter/search/mixed;keyWords=" 
+						+ String.join(",", profileForm.getTastes());
 	}
 
 	@RequestMapping(path = "/profile", params = { "addRow" }, method = RequestMethod.POST)
