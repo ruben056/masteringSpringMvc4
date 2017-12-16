@@ -17,9 +17,9 @@
 			<li class="collection-item avatar"
 				th:each="tweet : ${tweets}">
 				<img class="circle"
-					th:src="${tweet.user.profileImageUrl}" alt="" />
+					th:src="${tweet.profileImageUrl}" alt="" />
 				<span class="title"
-					th:text="${tweet.user.name}">User name</span>
+					th:text="${tweet.user}">User name</span>
 				<p th:text="${tweet.text}">Tweet msg</p>
 			</li>
 		</ul>
