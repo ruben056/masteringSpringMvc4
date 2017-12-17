@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,6 +29,12 @@ public class RestUserCtrl {
 	@ApiOperation("Retrieve all users")
 	@RequestMapping(value = "/users", method = RequestMethod.GET)
 	public List<User> findAll() {
+		return userRepository.findAll();
+	}
+	
+	@ApiOperation("Retrieve all users, returns only json, is for testing ...")
+	@RequestMapping(value = "/users2", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+	public List<User> findAllXml() {
 		return userRepository.findAll();
 	}
 
