@@ -31,10 +31,11 @@ dependencies {
 	// jackson serialization module for jsr-310 dates:
 	compile('com.fasterxml.jackson.datatype:jackson-datatype-jsr310')
 	// additional jackson dependency for xmls iso json:
-	compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
+	compile ('com.fasterxml.jackson.dataformat:jackson-dataformat-xml')
 
 	//security...
 	compile ('org.springframework.boot:spring-boot-starter-security')
+	compile ('org.thymeleaf.extras:thymeleaf-extras-springsecurity4')
 		
 	// documenting rest endpoints
 	compile ('io.springfox:springfox-swagger2:2.1.2')

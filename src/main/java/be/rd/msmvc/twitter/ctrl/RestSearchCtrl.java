@@ -19,7 +19,6 @@ public class RestSearchCtrl {
 	@Autowired
 	private SearchService searchService;
 
-
 	@RequestMapping(path = "/{searchType}", method=RequestMethod.GET)
 	public List<LightTweet> search(@PathVariable String searchType, @MatrixVariable List<String> keyWords) {
 		return searchService.search(searchType, keyWords);
