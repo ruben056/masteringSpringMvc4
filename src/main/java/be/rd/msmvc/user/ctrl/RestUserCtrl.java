@@ -20,7 +20,7 @@ import io.swagger.annotations.ApiOperation;
 
 @Api("User Api")
 @RestController
-@RequestMapping(path = "/rest/user/")
+@RequestMapping(path = "/api/user/")
 public class RestUserCtrl {
 
 	@Autowired

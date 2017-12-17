@@ -13,7 +13,7 @@ import be.rd.msmvc.twitter.dto.LightTweet;
 import be.rd.msmvc.twitter.service.SearchService;
 
 @RestController
-@RequestMapping(path = "/rest/twitter/search")
+@RequestMapping(path = "/api/twitter/search")
 public class RestSearchCtrl {
 	
 	@Autowired
