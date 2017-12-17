@@ -1,4 +1,4 @@
-package be.rd.msmvc.ctrl.twitter;
+package be.rd.msmvc.twitter.ctrl;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import be.rd.msmvc.session.twitter.UserProfileSession;
+import be.rd.msmvc.twitter.UserProfileSession;
 
 @Controller
 @RequestMapping("/mvc/twitter")

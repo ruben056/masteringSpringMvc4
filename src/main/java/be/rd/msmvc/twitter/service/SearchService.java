@@ -1,4 +1,4 @@
-package be.rd.msmvc.service.twitter;
+package be.rd.msmvc.twitter.service;
 
 import java.util.Arrays;
 import java.util.List;
@@ -9,7 +9,7 @@ import org.springframework.social.twitter.api.SearchParameters;
 import org.springframework.social.twitter.api.Twitter;
 import org.springframework.stereotype.Service;
 
-import be.rd.msmvc.ctrl.twitter.dto.LightTweet;
+import be.rd.msmvc.twitter.dto.LightTweet;
 
 @Service
 public class SearchService {

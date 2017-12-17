@@ -1,4 +1,4 @@
-package be.rd.msmvc.session.twitter;
+package be.rd.msmvc.twitter;
 
 import java.io.Serializable;
 import java.nio.file.Path;
@@ -11,7 +11,7 @@ import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
 
-import be.rd.msmvc.ctrl.twitter.dto.ProfileForm;
+import be.rd.msmvc.twitter.dto.ProfileForm;
 
 @Component
 @Scope(scopeName = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)

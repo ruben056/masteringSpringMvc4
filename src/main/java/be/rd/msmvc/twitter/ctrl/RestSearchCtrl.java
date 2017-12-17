@@ -1,4 +1,4 @@
-package be.rd.msmvc.ctrl.twitter;
+package be.rd.msmvc.twitter.ctrl;
 
 import java.util.List;
 
@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import be.rd.msmvc.ctrl.twitter.dto.LightTweet;
-import be.rd.msmvc.service.twitter.SearchService;
+import be.rd.msmvc.twitter.dto.LightTweet;
+import be.rd.msmvc.twitter.service.SearchService;
 
 @RestController
 @RequestMapping(path = "/rest/twitter/search")

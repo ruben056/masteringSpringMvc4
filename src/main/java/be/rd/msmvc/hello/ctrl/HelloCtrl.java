@@ -1,4 +1,4 @@
-package be.rd.msmvc.ctrl.hello;
+package be.rd.msmvc.hello.ctrl;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

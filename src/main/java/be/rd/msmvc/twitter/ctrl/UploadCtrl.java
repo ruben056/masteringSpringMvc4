@@ -1,4 +1,4 @@
-package be.rd.msmvc.ctrl.twitter;
+package be.rd.msmvc.twitter.ctrl;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -29,7 +29,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import be.rd.msmvc.config.upload.PicturesUploadProperties;
-import be.rd.msmvc.session.twitter.UserProfileSession;
+import be.rd.msmvc.twitter.UserProfileSession;
 
 @Controller
 @SessionAttributes("picturePath")

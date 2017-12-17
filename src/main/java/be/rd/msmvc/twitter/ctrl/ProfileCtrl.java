@@ -1,4 +1,4 @@
-package be.rd.msmvc.ctrl.twitter;
+package be.rd.msmvc.twitter.ctrl;
 
 import java.util.Locale;
 
@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import be.rd.msmvc.config.formatter.USLocalDateTimeFormatter;
-import be.rd.msmvc.ctrl.twitter.dto.ProfileForm;
-import be.rd.msmvc.session.twitter.UserProfileSession;
+import be.rd.msmvc.twitter.UserProfileSession;
+import be.rd.msmvc.twitter.dto.ProfileForm;
 
 @Controller
 @RequestMapping("/mvc/twitter")

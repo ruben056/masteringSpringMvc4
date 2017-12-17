@@ -1,4 +1,4 @@
-package be.rd.msmvc.ctrl.twitter.dto;
+package be.rd.msmvc.twitter.dto;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

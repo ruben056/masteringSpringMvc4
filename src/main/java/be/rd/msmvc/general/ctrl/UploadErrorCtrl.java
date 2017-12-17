@@ -1,4 +1,4 @@
-package be.rd.msmvc.ctrl;
+package be.rd.msmvc.general.ctrl;
 
 import java.util.Locale;
 

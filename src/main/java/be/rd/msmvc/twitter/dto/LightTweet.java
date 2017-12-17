@@ -1,4 +1,4 @@
-package be.rd.msmvc.ctrl.twitter.dto;
+package be.rd.msmvc.twitter.dto;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
