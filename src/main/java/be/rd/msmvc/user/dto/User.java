@@ -1,4 +1,4 @@
-package be.rd.msmvc.twitter.dto;
+package be.rd.msmvc.user.dto;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

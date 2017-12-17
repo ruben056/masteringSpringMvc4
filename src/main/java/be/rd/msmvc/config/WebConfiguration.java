@@ -54,12 +54,17 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
 	@Override
 	public void configurePathMatch(PathMatchConfigurer configurer) {
 		allowSemiColonContentForMatrixVariables(configurer);
+		allowDotInPath(configurer);
 	}
 
 	private void allowSemiColonContentForMatrixVariables(PathMatchConfigurer configurer) {
 		UrlPathHelper urlPathHelper = new UrlPathHelper();
 		urlPathHelper.setRemoveSemicolonContent(false);
 		configurer.setUrlPathHelper(urlPathHelper);
+	}
+
+	private void allowDotInPath(PathMatchConfigurer configurer) {
+		configurer.setUseRegisteredSuffixPatternMatch(true);
 	}
 
 	@Override
