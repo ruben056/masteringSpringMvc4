@@ -39,7 +39,7 @@ dependencies {
 		
 	// redis:
 	compile ('org.springframework.boot:spring-boot-starter-data-redis')
-	compile ('org.springframework.session:spring-session:1.0.1.RELEASE')
+	compile ('org.springframework.session:spring-session')
 	
 	// documenting rest endpoints
 	compile ('io.springfox:springfox-swagger2:2.1.2')
