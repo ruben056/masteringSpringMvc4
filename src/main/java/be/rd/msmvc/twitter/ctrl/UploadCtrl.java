@@ -8,7 +8,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URLConnection;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Locale;
 
@@ -23,7 +22,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.multipart.MultipartException;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -70,7 +68,7 @@ public class UploadCtrl {
 		
 		File tmpFile = copyFileToServer(file);
 		
-		userProfileSession.setPicturePath(Paths.get(tmpFile.getCanonicalPath()));
+		userProfileSession.setPicturePath(tmpFile.getCanonicalPath());
 		
 		return "redirect:/mvc/twitter/profile";
 	}
@@ -79,13 +77,13 @@ public class UploadCtrl {
 	@RequestMapping(path = "/uploadedPicture")
 	public void getUploadedPicture(HttpServletResponse response) throws IOException {
 		
-		Path picturePath = userProfileSession.getPicturePath();
+		String picturePath = userProfileSession.getPicturePath();
 		if(picturePath == null) {
-			picturePath = Paths.get(picturesUploadProperties.getAnonymousPicture().getFile().getCanonicalPath());
+			picturePath = picturesUploadProperties.getAnonymousPicture().getFile().getCanonicalPath();
 		}
 		
-		response.setHeader("Content-Type",URLConnection.guessContentTypeFromName(picturePath.toString()));
-		Files.copy(picturePath, response.getOutputStream());
+		response.setHeader("Content-Type",URLConnection.guessContentTypeFromName(picturePath));
+		Files.copy(Paths.get(picturePath), response.getOutputStream());
 	}
 	
 	private boolean isImage(MultipartFile file) {

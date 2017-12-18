@@ -2,6 +2,7 @@ package be.rd.msmvc.config.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -25,7 +26,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {		
-		http.formLogin().loginPage("/login")
+		http.formLogin().loginPage("/login").loginProcessingUrl("/login")
 			.defaultSuccessUrl("/mvc/twitter/profile")
 			.and()
 			.logout().logoutSuccessUrl("/login")
@@ -40,6 +41,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	}
 	
 	@Bean
+	@Primary
     public ProviderSignInController providerSignInController(
                 ConnectionFactoryLocator connectionFactoryLocator,
                 UsersConnectionRepository usersConnectionRepository, AuthenticatingSignInAdapter signInAdapter) {
@@ -47,6 +49,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
             connectionFactoryLocator, usersConnectionRepository,
             signInAdapter);
         controller.setSignUpUrl("/mvc/twitter/signup");
+        controller.setPostSignInUrl("/mvc/twitter/profile");
         return controller;
     }
 }

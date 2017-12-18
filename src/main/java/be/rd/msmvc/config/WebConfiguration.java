@@ -87,7 +87,7 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
 	
 	@Bean
 	public Docket userApi() {
-		String userApiPrefix = "/rest/user/";
+		String userApiPrefix = "/api/user/";
 		return new Docket(DocumentationType.SWAGGER_2)
 				.select()
 				.paths(path -> path.startsWith(userApiPrefix))
