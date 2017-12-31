@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import be.rd.msmvc.twitter.dto.LightTweet;
 
 @Service
-public class SearchService {
+public class SearchService implements ISearchService {
 	private Twitter twitter;
 
 	@Autowired
@@ -20,6 +20,7 @@ public class SearchService {
 		this.twitter = twitter;
 	}
 
+	@Override
 	public List<LightTweet> search(String searchType, List<String> keywords) {
 		
 		

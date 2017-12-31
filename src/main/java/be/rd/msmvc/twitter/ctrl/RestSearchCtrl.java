@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import be.rd.msmvc.twitter.dto.LightTweet;
-import be.rd.msmvc.twitter.service.SearchService;
+import be.rd.msmvc.twitter.service.ISearchService;
 
 @RestController
 @RequestMapping(path = "/api/twitter/search")
 public class RestSearchCtrl {
 	
 	@Autowired
-	private SearchService searchService;
+	private ISearchService searchService;
 
 	@RequestMapping(path = "/{searchType}", method=RequestMethod.GET)
 	public List<LightTweet> search(@PathVariable String searchType, @MatrixVariable List<String> keyWords) {

@@ -22,7 +22,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import be.rd.msmvc.twitter.dto.LightTweet;
-import be.rd.msmvc.twitter.service.SearchService;
+import be.rd.msmvc.twitter.service.ISearchService;
 
 @ActiveProfiles("redis")
 @RunWith(SpringRunner.class)
@@ -30,7 +30,7 @@ import be.rd.msmvc.twitter.service.SearchService;
 public class SearchCtrlMockTest {
 
 	@Mock
-	private SearchService searchService;
+	private ISearchService searchService;
 	
 	@InjectMocks
 	private SearchCtrl searchCtrl;
